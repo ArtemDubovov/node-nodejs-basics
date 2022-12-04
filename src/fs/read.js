@@ -1,16 +1,18 @@
-import { readFile } from 'node:fs/promises';
+import { createReadStream } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import path from 'path';
 
 const read = async () => {
     try {
-        const filename = fileURLToPath(import.meta.url);
-        const fileDirname = path.dirname(filename);
+        const filePath = fileURLToPath(import.meta.url);
+        const fileDirname = path.dirname(filePath);
         const pathFile = path.resolve(fileDirname, 'files', 'fileToRead.txt');
-        const contentFile = await readFile(pathFile, { encoding: 'utf-8' }, (err) => {
-            if (err) throw new Error('FS operation failed');
+        const readStream = createReadStream(pathFile).setEncoding('UTF-8');
+
+        readStream.on('data', (chunk) => {
+            console.log(chunk);
         });
-        console.log(contentFile);
+
     } catch (e) {
         throw new Error('FS operation failed');
     }
