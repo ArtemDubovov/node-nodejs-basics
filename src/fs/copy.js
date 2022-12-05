@@ -4,9 +4,6 @@ import path from 'path'
 
 import { fileURLToPath } from 'url';
 
-
-
-
 const copy = async () => {
     try {
         const filename = fileURLToPath(import.meta.url);
