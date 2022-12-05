@@ -1,4 +1,3 @@
-import { createReadStream } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { createHash } from 'node:crypto';
 import path from 'path';
